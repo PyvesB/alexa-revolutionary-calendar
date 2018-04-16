@@ -1,8 +1,10 @@
 package io.github.pyvesb.alexarevolutionarycalendar.speech;
 
+import static java.util.Locale.CANADA;
 import static java.util.Locale.CANADA_FRENCH;
-import static java.util.Locale.ENGLISH;
 import static java.util.Locale.FRENCH;
+import static java.util.Locale.UK;
+import static java.util.Locale.US;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -28,8 +30,6 @@ import com.amazon.speech.ui.PlainTextOutputSpeech;
 import com.amazon.speech.ui.SimpleCard;
 import com.amazon.speech.ui.StandardCard;
 
-import io.github.pyvesb.alexarevolutionarycalendar.speech.RevolutionarySpeechlet;
-
 class RevolutionarySpeechletTest {
 
 	private static final String REQUEST_ID = "amzn1.echo-api.request.3d4b1a8a-0082-49ca-b5c2-69e750a653ee";
@@ -43,10 +43,10 @@ class RevolutionarySpeechletTest {
 	}
 
 	@Test
-	@Tag("english-locale")
+	@Tag("en_GB-locale")
 	@SuppressWarnings("unchecked")
 	void shouldReturnLaunchResponse() {
-		LaunchRequest launchRequest = LaunchRequest.builder().withRequestId(REQUEST_ID).withLocale(ENGLISH).build();
+		LaunchRequest launchRequest = LaunchRequest.builder().withRequestId(REQUEST_ID).withLocale(UK).build();
 		SpeechletResponse response = underTest
 				.onLaunch((SpeechletRequestEnvelope<LaunchRequest>) buildEnvelope(launchRequest));
 
@@ -60,9 +60,9 @@ class RevolutionarySpeechletTest {
 	}
 
 	@Test
-	@Tag("english-locale")
+	@Tag("en_GB-locale")
 	void shouldReturnDateOfTheDayResponse() {
-		SpeechletResponse response = underTest.onIntent(buildIntentEnvelope("RevolutionaryDateOfTheDay", null, ENGLISH));
+		SpeechletResponse response = underTest.onIntent(buildIntentEnvelope("RevolutionaryDateOfTheDay", null, UK));
 
 		assertTrue(response.getNullableShouldEndSession());
 		assertEquals("Today is Décadi the 10th of Germinal 226. The tool of the day is the Hatchery.",
@@ -76,7 +76,7 @@ class RevolutionarySpeechletTest {
 	}
 
 	@Test
-	@Tag("french-locale")
+	@Tag("fr_FR-locale")
 	void shouldReturnDateOfTheDayResponseWithOtherLocale() {
 		SpeechletResponse response = underTest.onIntent(buildIntentEnvelope("RevolutionaryDateOfTheDay", null, FRENCH));
 
@@ -92,10 +92,10 @@ class RevolutionarySpeechletTest {
 	}
 
 	@Test
-	@Tag("english-locale")
+	@Tag("en_GB-locale")
 	void shouldReturnDateResponseIfDateProvidedViaSlot() {
 		Slot slot = Slot.builder().withName("date").withValue("2018-03-29").build();
-		SpeechletResponse response = underTest.onIntent(buildIntentEnvelope("RevolutionaryDateWithSlot", slot, ENGLISH));
+		SpeechletResponse response = underTest.onIntent(buildIntentEnvelope("RevolutionaryDateWithSlot", slot, UK));
 
 		assertTrue(response.getNullableShouldEndSession());
 		assertEquals("The revolutionary date is Nonidi the 9th of Germinal 226. The plant of the day is the Alder.",
@@ -109,7 +109,7 @@ class RevolutionarySpeechletTest {
 	}
 
 	@Test
-	@Tag("canada-french-locale")
+	@Tag("fr_CA-locale")
 	void shouldReturnDateResponseIfDateProvidedViaSlotWithDifferentLocale() {
 		Slot slot = Slot.builder().withName("date").withValue("2018-02-19").build();
 		SpeechletResponse response = underTest
@@ -127,38 +127,38 @@ class RevolutionarySpeechletTest {
 	}
 
 	@Test
-	@Tag("english-locale")
+	@Tag("en_US-locale")
 	void shouldReturnErrorResponseIfSlotEmpty() {
-		SpeechletResponse response = underTest.onIntent(buildIntentEnvelope("RevolutionaryDateWithSlot", null, ENGLISH));
+		SpeechletResponse response = underTest.onIntent(buildIntentEnvelope("RevolutionaryDateWithSlot", null, US));
 
 		assertFalse(response.getNullableShouldEndSession());
-		assertEquals("Please try again by clearly stating a date after February 21st 1792. For example: "
-				+ "\"convert 2018-03-05\".", ((PlainTextOutputSpeech) response.getOutputSpeech()).getText());
+		assertEquals("Please try again by clearly stating a date after 1792-02-21. For example: \"convert 2018-03-05\".",
+				((PlainTextOutputSpeech) response.getOutputSpeech()).getText());
 
 		SimpleCard card = (SimpleCard) response.getCard();
 		assertEquals("Revolutionary Calendar", card.getTitle());
-		assertEquals("Examples:\n\"what's today's date\"\n\"convert the 5th of May 2018\"", card.getContent());
+		assertEquals("Examples:\n\"what's today's date\"\n\"convert March 5th 2018\"", card.getContent());
 	}
 
 	@Test
-	@Tag("english-locale")
+	@Tag("en_CA-locale")
 	void shouldReturnErrorResponseIfDateUnparsable() {
 		Slot slot = Slot.builder().withName("date").withValue("2018-W26").build();
-		SpeechletResponse response = underTest.onIntent(buildIntentEnvelope("RevolutionaryDateWithSlot", slot, ENGLISH));
+		SpeechletResponse response = underTest.onIntent(buildIntentEnvelope("RevolutionaryDateWithSlot", slot, CANADA));
 
 		assertFalse(response.getNullableShouldEndSession());
-		assertEquals("Please try again by clearly stating a date after February 21st 1792. For example: "
-				+ "\"convert 2018-03-05\".", ((PlainTextOutputSpeech) response.getOutputSpeech()).getText());
+		assertEquals("Please try again by clearly stating a date after 1792-02-21. For example: \"convert 2018-03-05\".",
+				((PlainTextOutputSpeech) response.getOutputSpeech()).getText());
 
 		SimpleCard card = (SimpleCard) response.getCard();
 		assertEquals("Revolutionary Calendar", card.getTitle());
-		assertEquals("Examples:\n\"what's today's date\"\n\"convert the 5th of May 2018\"", card.getContent());
+		assertEquals("Examples:\n\"what's today's date\"\n\"convert March 5th 2018\"", card.getContent());
 	}
 
 	@Test
-	@Tag("english-locale")
+	@Tag("en_GB-locale")
 	void shouldReturnHelpResponse() {
-		SpeechletResponse response = underTest.onIntent(buildIntentEnvelope("AMAZON.HelpIntent", null, ENGLISH));
+		SpeechletResponse response = underTest.onIntent(buildIntentEnvelope("AMAZON.HelpIntent", null, UK));
 
 		assertFalse(response.getNullableShouldEndSession());
 		assertEquals("Ask for today's date or a specific date to get its revolutionary equivalent! For instance: "
@@ -166,13 +166,13 @@ class RevolutionarySpeechletTest {
 
 		SimpleCard card = (SimpleCard) response.getCard();
 		assertEquals("Revolutionary Calendar", card.getTitle());
-		assertEquals("Examples:\n\"what's today's date\"\n\"convert the 5th of May 2018\"", card.getContent());
+		assertEquals("Examples:\n\"what's today's date\"\n\"convert the 5th of March 2018\"", card.getContent());
 	}
 
 	@Test
-	@Tag("english-locale")
+	@Tag("en_GB-locale")
 	void shouldReturnUnsupportedResponseIfIntentNameUnsupported() {
-		SpeechletResponse response = underTest.onIntent(buildIntentEnvelope("UnsupportedIntent", null, ENGLISH));
+		SpeechletResponse response = underTest.onIntent(buildIntentEnvelope("UnsupportedIntent", null, UK));
 
 		assertFalse(response.getNullableShouldEndSession());
 		assertEquals("Sorry, I didn't quite get that. Try again or say \"help\" to get the instructions.",
@@ -180,14 +180,14 @@ class RevolutionarySpeechletTest {
 
 		SimpleCard card = (SimpleCard) response.getCard();
 		assertEquals("Revolutionary Calendar", card.getTitle());
-		assertEquals("Examples:\n\"what's today's date\"\n\"convert the 5th of May 2018\"", card.getContent());
+		assertEquals("Examples:\n\"what's today's date\"\n\"convert the 5th of March 2018\"", card.getContent());
 	}
 
 	@Test
-	@Tag("english-locale")
+	@Tag("en_GB-locale")
 	@SuppressWarnings("unchecked")
 	void shouldReturnUnsupportedResponseIfNoIntentInRequest() {
-		IntentRequest intentRequest = IntentRequest.builder().withRequestId(REQUEST_ID).withLocale(ENGLISH).build();
+		IntentRequest intentRequest = IntentRequest.builder().withRequestId(REQUEST_ID).withLocale(UK).build();
 		SpeechletResponse response = underTest
 				.onIntent((SpeechletRequestEnvelope<IntentRequest>) buildEnvelope(intentRequest));
 
@@ -197,7 +197,7 @@ class RevolutionarySpeechletTest {
 
 		SimpleCard card = (SimpleCard) response.getCard();
 		assertEquals("Revolutionary Calendar", card.getTitle());
-		assertEquals("Examples:\n\"what's today's date\"\n\"convert the 5th of May 2018\"", card.getContent());
+		assertEquals("Examples:\n\"what's today's date\"\n\"convert the 5th of March 2018\"", card.getContent());
 	}
 
 	@SuppressWarnings("unchecked")
