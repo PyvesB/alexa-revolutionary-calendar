@@ -81,6 +81,8 @@ public class RevolutionarySpeechlet implements SpeechletV2 {
 			return getDateResponse("date-of-the-day", revolutionaryDateProvider.provideCurrentDate(locale), locale);
 		} else if ("AMAZON.HelpIntent".equals(intentName)) {
 			return getAskResponse("help", "card-examples", locale);
+		} else if ("AMAZON.CancelIntent".equals(intentName) || "AMAZON.StopIntent".equals(intentName)) {
+			return getCancelStopResponse(locale);
 		}
 		return getAskResponse("unsupported", "card-examples", locale);
 	}
@@ -106,6 +108,18 @@ public class RevolutionarySpeechlet implements SpeechletV2 {
 		Reprompt reprompt = getReprompt(outputSpeech);
 		SimpleCard card = getSimpleCard(cardContentKey, messages);
 		return SpeechletResponse.newAskResponse(outputSpeech, reprompt, card);
+	}
+	
+	/**
+	 * Creates a Tell response saying goodbye.
+	 * 
+	 * @param locale the locale to be used to construct the response.
+	 * @return the resulting speech text.
+	 */
+	private SpeechletResponse getCancelStopResponse(Locale locale) {
+		ResourceBundle messages = ResourceBundle.getBundle("messages", locale);
+		PlainTextOutputSpeech speech = getPlainTextOutputSpeech(messages.getString("cancel-stop"));
+		return SpeechletResponse.newTellResponse(speech);
 	}
 
 	/**

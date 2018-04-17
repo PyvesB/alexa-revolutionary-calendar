@@ -17,6 +17,8 @@ import java.util.Locale;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import com.amazon.speech.json.SpeechletRequestEnvelope;
 import com.amazon.speech.slu.Intent;
@@ -167,6 +169,16 @@ class RevolutionarySpeechletTest {
 		SimpleCard card = (SimpleCard) response.getCard();
 		assertEquals("Revolutionary Calendar", card.getTitle());
 		assertEquals("Examples:\n\"what's today's date\"\n\"convert the 5th of March 2018\"", card.getContent());
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = { "AMAZON.CancelIntent", "AMAZON.StopIntent" })
+	@Tag("en_GB-locale")
+	void shouldReturnCancelOrStopResponse(String intentName) {
+		SpeechletResponse response = underTest.onIntent(buildIntentEnvelope(intentName, null, UK));
+
+		assertTrue(response.getNullableShouldEndSession());
+		assertEquals("Okay. See you soon!", ((PlainTextOutputSpeech) response.getOutputSpeech()).getText());
 	}
 
 	@Test
