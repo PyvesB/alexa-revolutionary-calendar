@@ -226,7 +226,7 @@ public class RevolutionarySpeechlet implements SpeechletV2 {
 		card.setTitle(messages.getString("card-title"));
 		card.setText(text);
 		Image image = new Image();
-		image.setLargeImageUrl("https://s3-eu-west-1.amazonaws.com/alexa-revolutionary-calendar/" + imageName + ".png");
+		image.setLargeImageUrl("https://s3-eu-west-1.amazonaws.com/alexa-revolutionary-calendar/calendar.jpg");
 		card.setImage(image);
 		return card;
 	}

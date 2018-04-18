@@ -73,7 +73,7 @@ class RevolutionarySpeechletTest {
 		StandardCard card = (StandardCard) response.getCard();
 		assertEquals("Revolutionary Calendar", card.getTitle());
 		assertEquals("Décadi, 10 Germinal 226\nHatchery", card.getText());
-		assertEquals("https://s3-eu-west-1.amazonaws.com/alexa-revolutionary-calendar/Germinal.png",
+		assertEquals("https://s3-eu-west-1.amazonaws.com/alexa-revolutionary-calendar/calendar.jpg",
 				card.getImage().getLargeImageUrl());
 	}
 
@@ -89,7 +89,7 @@ class RevolutionarySpeechletTest {
 		StandardCard card = (StandardCard) response.getCard();
 		assertEquals("Calendrier Révolutionnaire", card.getTitle());
 		assertEquals("Décadi, 10 Germinal 226\nCouvoir", card.getText());
-		assertEquals("https://s3-eu-west-1.amazonaws.com/alexa-revolutionary-calendar/Germinal.png",
+		assertEquals("https://s3-eu-west-1.amazonaws.com/alexa-revolutionary-calendar/calendar.jpg",
 				card.getImage().getLargeImageUrl());
 	}
 
@@ -106,7 +106,7 @@ class RevolutionarySpeechletTest {
 		StandardCard card = (StandardCard) response.getCard();
 		assertEquals("Revolutionary Calendar", card.getTitle());
 		assertEquals("Nonidi, 9 Germinal 226\nAlder", card.getText());
-		assertEquals("https://s3-eu-west-1.amazonaws.com/alexa-revolutionary-calendar/Germinal.png",
+		assertEquals("https://s3-eu-west-1.amazonaws.com/alexa-revolutionary-calendar/calendar.jpg",
 				card.getImage().getLargeImageUrl());
 	}
 
@@ -124,7 +124,7 @@ class RevolutionarySpeechletTest {
 		StandardCard card = (StandardCard) response.getCard();
 		assertEquals("Calendrier Révolutionnaire", card.getTitle());
 		assertEquals("Primidi, 1 Ventôse 226\nTussilage", card.getText());
-		assertEquals("https://s3-eu-west-1.amazonaws.com/alexa-revolutionary-calendar/Ventôse.png",
+		assertEquals("https://s3-eu-west-1.amazonaws.com/alexa-revolutionary-calendar/calendar.jpg",
 				card.getImage().getLargeImageUrl());
 	}
 
