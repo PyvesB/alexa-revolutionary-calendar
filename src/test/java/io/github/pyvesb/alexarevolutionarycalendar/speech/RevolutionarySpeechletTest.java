@@ -58,7 +58,8 @@ class RevolutionarySpeechletTest {
 
 		SimpleCard card = (SimpleCard) response.getCard();
 		assertEquals("Revolutionary Calendar", card.getTitle());
-		assertEquals("Calendar conceived by Gilbert Romme. Officially used from 1793 to 1805.", card.getContent());
+		assertEquals("Calendar conceived by Gilbert Romme and Claude Joseph Ferry. "
+				+ "Officially used from 1793 to 1805, as well as in 1871 during the Paris Commune.", card.getContent());
 	}
 
 	@Test
