@@ -7,6 +7,9 @@
 <a href="https://github.com/PyvesB/alexa-revolutionary-calendar/blob/master/LICENSE">
 <img src ="https://img.shields.io/github/license/PyvesB/alexa-revolutionary-calendar.svg" />
 </a>
+<a href="https://github.com/PyvesB/alexa-revolutionary-calendar/releases">
+<img src ="https://img.shields.io/github/release/PyvesB/alexa-revolutionary-calendar.svg" />
+</a>
 <a href="https://github.com/PyvesB/alexa-revolutionary-calendar/issues">
 <img src ="https://img.shields.io/github/issues/PyvesB/alexa-revolutionary-calendar.svg" />
 </a>
@@ -15,14 +18,14 @@
 
 **Demandez à Alexa de convertir les dates en utilisant le calendrier révolutionnaire !**
 
-**_Ask Alexa to convert dates using the French revolutionary calendar!_**
+**_Ask Alexa to convert dates using the French revolutionary calendar! Available on the [Amazon skill store](https://www.amazon.com/dp/B07CG3V7BC)!_**
 
 
 # La skill en bref - The skill at a glance
 
-![](http://images.jupload.fr/1523824930.png) Créé par Gilbert Romme et Claude Joseph Ferry, le [calendrier révolutionnaire](https://fr.wikipedia.org/wiki/Calendrier_républicain), aussi appelé calendrier républicain, était utilisé du temps de la révolution de 1782 à 1806, ainsi que brièvement en 1871 pendant la Commune de Paris. Cette skill permet à Alexa de vous donner la date du jour (ex : "Alexa, demande à Calendrier Révolutionnaire la date") ainsi que n'importe quelle date passée ou à venir (ex : "Alexa, lance Calendrier Révolutionnaire et donne-moi la date du 5 Mars 2018") en utilisant ce calendrier. 
+![](http://images.jupload.fr/1523824930.png) Créé par Gilbert Romme et Claude Joseph Ferry, le [calendrier révolutionnaire](https://fr.wikipedia.org/wiki/Calendrier_républicain), aussi appelé calendrier républicain, était utilisé du temps de la révolution de 1782 à 1806, ainsi que brièvement en 1871 pendant la Commune de Paris. Cette skill permet à Alexa de vous donner la date du jour (ex : "Alexa, demande à Calendrier Révolutionnaire la date") ainsi que n'importe quelle date passée ou à venir (ex : "Alexa, demande à Calendrier Révolutionnaire la date du 5 Mars 2018") en utilisant ce calendrier. 
 
-![](http://images.jupload.fr/1523824980.png) _Created by Gilbert Romme and Claude Joseph Ferry, the [revolutionary calendar](https://en.wikipedia.org/wiki/French_Republican_Calendar), also known as the republican calendar, was used at the time of the French revolution from 1782 to 1806, as well as in 1871 during the Paris Commune. This Alexa skill allows users to get the date of the day (e.g. "Alexa, launch Revolutionary Calendar and give me today's date") as well as any date in the past or in the future (e.g. "Alexa, ask Revolutionary Calendar to convert the 5th of March 2018") by using this calendar._
+![](http://images.jupload.fr/1523824980.png) _Created by Gilbert Romme and Claude Joseph Ferry, the [revolutionary calendar](https://en.wikipedia.org/wiki/French_Republican_Calendar), also known as the republican calendar, was used at the time of the French revolution from 1782 to 1806, as well as in 1871 during the Paris Commune. This Alexa skill allows users to get the date of the day (e.g. "Alexa, ask Revolutionary Calendar for today's date") as well as any date in the past or in the future (e.g. "Alexa, ask Revolutionary Calendar to convert the 5th of March 2018") by using this calendar._
 
 # Contribuer - Contributing
 
