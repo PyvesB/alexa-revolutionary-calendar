@@ -109,7 +109,7 @@ public class RevolutionarySpeechlet implements SpeechletV2 {
 		SimpleCard card = getSimpleCard(cardContentKey, messages);
 		return SpeechletResponse.newAskResponse(outputSpeech, reprompt, card);
 	}
-	
+
 	/**
 	 * Creates a Tell response saying goodbye.
 	 * 
@@ -165,7 +165,7 @@ public class RevolutionarySpeechlet implements SpeechletV2 {
 
 		String cardText = date.getWeekdayName() + ", " + date.dayOfMonth + " " + date.getMonthName() + " " + date.year + "\n"
 				+ date.getObjectOfTheDay();
-		StandardCard card = getStandardCard(cardText, date.getMonthName(), messages);
+		StandardCard card = getStandardCard(cardText, messages);
 
 		return SpeechletResponse.newTellResponse(speech, card);
 	}
@@ -217,11 +217,10 @@ public class RevolutionarySpeechlet implements SpeechletV2 {
 	 * Creates a standard card object.
 	 * 
 	 * @param text body of the card.
-	 * @param imageName name of the image used for the card.
 	 * @param messages contains all strings for the locale of the request.
 	 * @return the display card to be sent along with the voice response.
 	 */
-	private StandardCard getStandardCard(String text, String imageName, ResourceBundle messages) {
+	private StandardCard getStandardCard(String text, ResourceBundle messages) {
 		StandardCard card = new StandardCard();
 		card.setTitle(messages.getString("card-title"));
 		card.setText(text);
