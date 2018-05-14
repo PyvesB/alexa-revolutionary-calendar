@@ -6,7 +6,6 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,7 +38,6 @@ import io.github.pyvesb.alexarevolutionarycalendar.date.RevolutionaryDateProvide
 public class RevolutionarySpeechlet implements SpeechletV2 {
 
 	private static final Logger LOGGER = LogManager.getLogger(RevolutionarySpeechlet.class);
-	private static final String[] DATE_PLACEHOLDERS = new String[] { "WEEKDAY", "DAY", "MONTH", "YEAR", "TYPE", "OBJECT" };
 
 	private final RevolutionaryDateProvider revolutionaryDateProvider;
 
@@ -158,9 +156,9 @@ public class RevolutionarySpeechlet implements SpeechletV2 {
 		ResourceBundle messages = ResourceBundle.getBundle("messages", locale);
 
 		boolean french = Locale.FRENCH.getLanguage().equals(locale.getLanguage());
-		String speechText = StringUtils.replaceEach(messages.getString(responseKey), DATE_PLACEHOLDERS,
-				new String[] { date.getWeekdayName(), getDayOfMonthOrdinal(date, french), date.getMonthName(),
-						Integer.toString(date.year), date.getObjectTypeName(), getReadableObjectOfTheDay(date, french) });
+		String speechText = String.format(messages.getString(responseKey), date.getWeekdayName(),
+				getDayOfMonthOrdinal(date, french), date.getMonthName(), date.year, date.getObjectTypeName(),
+				getReadableObjectOfTheDay(date, french));
 		PlainTextOutputSpeech speech = getPlainTextOutputSpeech(speechText);
 
 		String cardText = date.getWeekdayName() + ", " + date.dayOfMonth + " " + date.getMonthName() + " " + date.year + "\n"

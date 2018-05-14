@@ -54,12 +54,6 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.7</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>ca.rmen</groupId>
 			<artifactId>lib-french-revolutionary-calendar</artifactId>
 			<version>1.8.0</version>
