@@ -128,7 +128,7 @@ public class RevolutionarySpeechlet implements SpeechletV2 {
 	 * @return either a date response if the handling was successful or else an ask response.
 	 */
 	private SpeechletResponse handleIntentWithSlot(Intent intent, Locale locale) {
-		Slot dateSlot = intent.getSlots().get("date");
+		Slot dateSlot = intent.getSlot("date");
 		String dateValue = null;
 		if (dateSlot != null) {
 			dateValue = dateSlot.getValue();
