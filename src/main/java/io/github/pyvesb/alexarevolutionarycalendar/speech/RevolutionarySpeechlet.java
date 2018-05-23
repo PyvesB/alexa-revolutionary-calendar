@@ -68,13 +68,13 @@ public class RevolutionarySpeechlet implements SpeechletV2 {
 	@Override
 	public SpeechletResponse onIntent(SpeechletRequestEnvelope<IntentRequest> envelope) {
 		Intent intent = envelope.getRequest().getIntent();
-		String sessionId = envelope.getSession().getSessionId();
 		String intentName = (intent == null) ? null : intent.getName();
 		Locale locale = envelope.getRequest().getLocale();
-		LOGGER.info("Received intent (session={}, name={}, locale={})", sessionId, intentName, locale);
+		LOGGER.info("Received intent (session={}, name={}, locale={})", envelope.getSession().getSessionId(), intentName,
+				locale);
 
 		if ("RevolutionaryDateWithSlot".equals(intentName)) {
-			return handleIntentWithSlot(sessionId, intent, locale);
+			return handleIntentWithSlot(intent, locale);
 		} else if ("RevolutionaryDateOfTheDay".equals(intentName)) {
 			return getDateResponse("date-of-the-day", revolutionaryDateProvider.provideCurrentDate(locale), locale);
 		} else if ("AMAZON.HelpIntent".equals(intentName)) {
@@ -123,12 +123,11 @@ public class RevolutionarySpeechlet implements SpeechletV2 {
 	/**
 	 * Handles an intent which is expected to contain a date slot.
 	 * 
-	 * @param sessionId the id of the session in which this intent was requested
 	 * @param intent the request intent
 	 * @param locale the locale to be used to construct the response.
 	 * @return either a date response if the handling was successful or else an ask response.
 	 */
-	private SpeechletResponse handleIntentWithSlot(String sessionId, Intent intent, Locale locale) {
+	private SpeechletResponse handleIntentWithSlot(Intent intent, Locale locale) {
 		Slot dateSlot = intent.getSlots().get("date");
 		String dateValue = null;
 		if (dateSlot != null) {
@@ -136,11 +135,11 @@ public class RevolutionarySpeechlet implements SpeechletV2 {
 			Optional<FrenchRevolutionaryCalendarDate> parsedDate = revolutionaryDateProvider
 					.parseISO8601CalendarDate(dateValue, locale);
 			if (parsedDate.isPresent()) {
-				LOGGER.info("Parsed date (session={}, date={}, locale={})", sessionId, dateValue, locale);
+				LOGGER.info("Parsed date (date={}, locale={})", dateValue, locale);
 				return getDateResponse("date-with-slot", parsedDate.get(), locale);
 			}
 		}
-		LOGGER.warn("Unparsable date (session={}, date={}, locale={})", sessionId, dateValue, locale);
+		LOGGER.warn("Unparsable date (date={}, locale={})", dateValue, locale);
 		return getAskResponse("error", "card-examples", locale);
 	}
 
