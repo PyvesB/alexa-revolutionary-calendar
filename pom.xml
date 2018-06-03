@@ -23,16 +23,35 @@
 
 	<dependencies>
 		<!-- Compile dependencies -->
+		<!-- AWS -->
 		<dependency>
 			<groupId>com.amazon.alexa</groupId>
-			<artifactId>alexa-skills-kit</artifactId>
-			<version>1.8.1</version>
+			<artifactId>ask-sdk-core</artifactId>
+			<version>2.3.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>log4j</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.amazon.alexa</groupId>
+			<artifactId>ask-sdk-lambda-support</artifactId>
+			<version>2.3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-lambda-java-core</artifactId>
 			<version>1.2.0</version>
 		</dependency>
+		<!-- Calendar library -->
+		<dependency>
+			<groupId>ca.rmen</groupId>
+			<artifactId>lib-french-revolutionary-calendar</artifactId>
+			<version>1.8.0</version>
+		</dependency>
+		<!-- Logging -->
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-lambda-java-log4j2</artifactId>
@@ -49,9 +68,9 @@
 			<version>2.11.0</version>
 		</dependency>
 		<dependency>
-			<groupId>ca.rmen</groupId>
-			<artifactId>lib-french-revolutionary-calendar</artifactId>
-			<version>1.8.0</version>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-1.2-api</artifactId>
+			<version>2.11.0</version>
 		</dependency>
 
 		<!-- Test dependencies -->
@@ -108,25 +127,6 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
-							<minimizeJar>true</minimizeJar>
-							<excludes>
-								<exclude>src/test/resources/**</exclude>
-							</excludes>
-							<!-- Minimize doesn't see that LambdaAppender is referenced in log4j2.xml -->
-							<filters>
-								<filter>
-									<artifact>com.amazonaws:aws-lambda-java-log4j2</artifact>
-									<includes>
-										<include>**</include>
-									</includes>
-								</filter>
-								<filter>
-									<artifact>org.apache.logging.log4j:*</artifact>
-									<includes>
-										<include>**</include>
-									</includes>
-								</filter>
-							</filters>
 							<transformers>
 								<transformer
 									implementation="com.github.edwgiz.mavenShadePlugin.log4j2CacheTransformer.PluginsCacheFileTransformer">
