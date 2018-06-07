@@ -25,25 +25,25 @@ import com.amazon.ask.model.Slot;
 
 import utils.UnexpectedEmptyOptional;
 
-class DateRequestHandlerTest {
+class DateIntentHandlerTest {
 
 	private static final Clock CLOCK = Clock.fixed(Instant.ofEpochMilli(1522426160067L), ZoneId.of("UTC"));
 
 	private final DateIntentHandler underTest = new DateIntentHandler(CLOCK);
-
+	
 	@Test
 	void shouldHandleIntentRequestsWithDateIntentName() {
-		assertTrue(underTest.canHandle(buildIntentInput("RevolutionaryDateOfTheDay", UK)));
+		assertTrue(underTest.canHandle(buildIntentInput("RevolutionaryDateOfTheDay")));
 	}
 
 	@Test
 	void shouldNotHandleIntentRequestsWithDifferentName() {
-		assertFalse(underTest.canHandle(buildIntentInput("AMAZON.HelpIntent", UK)));
+		assertFalse(underTest.canHandle(buildIntentInput("AMAZON.HelpIntent")));
 	}
 
 	@Test
 	void shouldNotHandleOtherRequests() {
-		assertFalse(underTest.canHandle(buildLaunchInput(FRENCH)));
+		assertFalse(underTest.canHandle(buildLaunchInput()));
 	}
 
 	@Test
@@ -119,5 +119,5 @@ class DateRequestHandlerTest {
 		assertSimpleCard(response, "Revolutionary Calendar",
 				"Examples:\n\"what's today's date\"\n\"convert March 5th 2018\"");
 	}
-
+	
 }

@@ -17,24 +17,24 @@ import com.amazon.ask.model.Response;
 
 import utils.UnexpectedEmptyOptional;
 
-class CancelStopRequestHandlerTest {
+class CancelStopIntentHandlerTest {
 
 	private final CancelStopIntentHandler underTest = new CancelStopIntentHandler();
 
 	@ParameterizedTest
 	@ValueSource(strings = { "AMAZON.CancelIntent", "AMAZON.StopIntent" })
 	void shouldHandleIntentRequestsWithCancelOrStopIntentName(String intentName) {
-		assertTrue(underTest.canHandle(buildIntentInput(intentName, UK)));
+		assertTrue(underTest.canHandle(buildIntentInput(intentName)));
 	}
 
 	@Test
 	void shouldNotHandleIntentRequestsWithDifferentName() {
-		assertFalse(underTest.canHandle(buildIntentInput("AMAZON.HelpIntent", UK)));
+		assertFalse(underTest.canHandle(buildIntentInput("AMAZON.HelpIntent")));
 	}
 
 	@Test
 	void shouldNotHandleOtherRequests() {
-		assertFalse(underTest.canHandle(buildLaunchInput(UK)));
+		assertFalse(underTest.canHandle(buildLaunchInput()));
 	}
 
 	@Test

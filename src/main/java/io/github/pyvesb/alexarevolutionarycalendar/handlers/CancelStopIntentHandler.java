@@ -1,7 +1,6 @@
 package io.github.pyvesb.alexarevolutionarycalendar.handlers;
 
 import static com.amazon.ask.request.Predicates.intentName;
-import static com.amazon.ask.request.Predicates.requestType;
 
 import java.util.Locale;
 import java.util.Optional;
@@ -12,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
-import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.model.Response;
 
@@ -22,8 +20,7 @@ public class CancelStopIntentHandler implements RequestHandler {
 
 	@Override
 	public boolean canHandle(HandlerInput input) {
-		return input.matches(requestType(IntentRequest.class))
-				&& (input.matches(intentName("AMAZON.CancelIntent")) || input.matches(intentName("AMAZON.StopIntent")));
+		return input.matches(intentName("AMAZON.CancelIntent")) || input.matches(intentName("AMAZON.StopIntent"));
 	}
 
 	@Override

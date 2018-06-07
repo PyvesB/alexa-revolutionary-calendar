@@ -1,7 +1,6 @@
 package io.github.pyvesb.alexarevolutionarycalendar.handlers;
 
 import static com.amazon.ask.request.Predicates.intentName;
-import static com.amazon.ask.request.Predicates.requestType;
 
 import java.time.Clock;
 import java.util.Locale;
@@ -27,12 +26,11 @@ import io.github.pyvesb.alexarevolutionarycalendar.date.RevolutionaryDateProvide
 
 public class DateIntentHandler implements RequestHandler {
 
+	private static final Logger LOGGER = LogManager.getLogger(DateIntentHandler.class);
 	private static final String IMAGE_URL = "https://s3-eu-west-1.amazonaws.com/alexa-revolutionary-calendar/calendar.jpg";
+	private static final Image IMAGE = Image.builder().withLargeImageUrl(IMAGE_URL).build();
 	private static final String DATE_OF_THE_DAY = "RevolutionaryDateOfTheDay";
 	private static final String DATE_WITH_SLOT = "RevolutionaryDateWithSlot";
-
-	private static final Logger LOGGER = LogManager.getLogger(DateIntentHandler.class);
-	private static final Image IMAGE = Image.builder().withLargeImageUrl(IMAGE_URL).build();
 
 	private final RevolutionaryDateProvider revolutionaryDateProvider;
 
@@ -42,8 +40,7 @@ public class DateIntentHandler implements RequestHandler {
 
 	@Override
 	public boolean canHandle(HandlerInput input) {
-		return input.matches(requestType(IntentRequest.class))
-				&& (input.matches(intentName(DATE_OF_THE_DAY)) || input.matches(intentName(DATE_WITH_SLOT)));
+		return input.matches(intentName(DATE_OF_THE_DAY)) || input.matches(intentName(DATE_WITH_SLOT));
 	}
 
 	@Override
@@ -54,11 +51,12 @@ public class DateIntentHandler implements RequestHandler {
 		String intentName = intent.getName();
 		LOGGER.info("Date intent (session={}, type={}, locale={})", envelope.getSession().getSessionId(), intentName,
 				locale);
+		ResourceBundle messages = ResourceBundle.getBundle("messages", locale);
 		if (DATE_WITH_SLOT.equals(intentName)) {
-			return handleIntent(input.getResponseBuilder(), intent, ResourceBundle.getBundle("messages", locale));
+			return handleIntent(input.getResponseBuilder(), intent, messages);
 		}
 		return getDateResponse(input.getResponseBuilder(), "date-of-the-day",
-				revolutionaryDateProvider.provideCurrentDate(locale), ResourceBundle.getBundle("messages", locale));
+				revolutionaryDateProvider.provideCurrentDate(locale), messages);
 	}
 
 	/**

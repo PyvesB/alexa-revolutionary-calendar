@@ -11,6 +11,7 @@ import io.github.pyvesb.alexarevolutionarycalendar.handlers.CancelStopIntentHand
 import io.github.pyvesb.alexarevolutionarycalendar.handlers.DateIntentHandler;
 import io.github.pyvesb.alexarevolutionarycalendar.handlers.HelpIntentHandler;
 import io.github.pyvesb.alexarevolutionarycalendar.handlers.LaunchRequestHandler;
+import io.github.pyvesb.alexarevolutionarycalendar.handlers.SessionEndedRequestHandler;
 
 /**
  * Class used as a handler for AWS Lambda function calls. Delegates all processing to one of the request handler
@@ -34,10 +35,11 @@ public class RevolutionaryStreamHandler extends SkillStreamHandler {
 
 	private static Skill getSkill() {
 		return new CustomSkillBuilder()
-				.addRequestHandlers(new CancelStopIntentHandler(),
+				.addRequestHandlers(new LaunchRequestHandler(),
 						new HelpIntentHandler(),
-						new LaunchRequestHandler(),
-						new DateIntentHandler(CLOCK))
+						new CancelStopIntentHandler(),
+						new DateIntentHandler(CLOCK),
+						new SessionEndedRequestHandler())
 				.withSkillId(SKILL_ID)
 				.build();
 	}

@@ -21,12 +21,12 @@ class LaunchRequestHandlerTest {
 
 	@Test
 	void shouldHandleLaunchRequests() {
-		assertTrue(underTest.canHandle(buildLaunchInput(UK)));
+		assertTrue(underTest.canHandle(buildLaunchInput()));
 	}
 
 	@Test
 	void shouldNotHandleOtherRequests() {
-		assertFalse(underTest.canHandle(InputBuilder.buildIntentInput("RevolutionaryDateOfTheDay", UK)));
+		assertFalse(underTest.canHandle(InputBuilder.buildIntentInput("RevolutionaryDateOfTheDay")));
 	}
 
 	@Test

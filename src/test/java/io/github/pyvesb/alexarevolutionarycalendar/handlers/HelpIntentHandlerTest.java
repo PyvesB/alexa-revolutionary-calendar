@@ -15,23 +15,23 @@ import com.amazon.ask.model.Response;
 
 import utils.UnexpectedEmptyOptional;
 
-class HelpRequestHandlerTest {
+class HelpIntentHandlerTest {
 
 	private final HelpIntentHandler underTest = new HelpIntentHandler();
 
 	@Test
 	void shouldHandleIntentRequestsWithHelpIntentName() {
-		assertTrue(underTest.canHandle(buildIntentInput("AMAZON.HelpIntent", UK)));
+		assertTrue(underTest.canHandle(buildIntentInput("AMAZON.HelpIntent")));
 	}
 
 	@Test
 	void shouldNotHandleIntentRequestsWithDifferentName() {
-		assertFalse(underTest.canHandle(buildIntentInput("RevolutionaryDateOfTheDay", UK)));
+		assertFalse(underTest.canHandle(buildIntentInput("RevolutionaryDateOfTheDay")));
 	}
 
 	@Test
 	void shouldNotHandleOtherRequests() {
-		assertFalse(underTest.canHandle(buildLaunchInput(UK)));
+		assertFalse(underTest.canHandle(buildLaunchInput()));
 	}
 
 	@Test
