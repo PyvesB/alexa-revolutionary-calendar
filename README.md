@@ -37,7 +37,7 @@
 
 #### :speech_balloon: Support - Support
 
-![](http://images.jupload.fr/1523824930.png) Une idée ? Des soucis avec la skill ou besoin d'aide ? N'hésitez pas à ouvrir un [**rapport de bug**](https://github.com/PyvesB/alexa-revolutionary-calendar/issues)! Vous trouvez le project utile, amusant ou intéressant ? Pensez à mettre une **étoile** :star: sur le dépôt en cliquant sur l'icône en haut à droite de cette page !
+![](http://images.jupload.fr/1523824930.png) Une idée ? Des soucis avec la skill ou besoin d'aide ? N'hésitez pas à ouvrir un [**rapport de bug**](https://github.com/PyvesB/alexa-revolutionary-calendar/issues)! Vous trouvez le projet utile, amusant ou intéressant ? Pensez à mettre une **étoile** :star: sur le dépôt en cliquant sur l'icône en haut à droite de cette page !
 
 ![](http://images.jupload.fr/1523824980.png) _Thought of a cool idea? Found a problem or need some help? Feel free to open an [**issue**](https://github.com/PyvesB/alexa-revolutionary-calendar/issues)! Find the project useful, fun or interesting? **Star** :star: the repository by clicking on the icon on the top right of this page!_
 
